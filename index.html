@@ -9,11 +9,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fffaf3;
-            --card-color: #ffe4c4;
-            --text-main: #7a3b12;
-            --text-muted: #a85c2a;
-            --accent: #ff7a1a;
+            --bg-color: #f7f5ee;
+            --card-color: #dbe6d6;
+            --text-main: #45594a;
+            --text-muted: #74886f;
+            --accent: #c1620e;
+            --panel-bg: #fbfaf4;
+            --badge-bg: #cfe0cb;
+        }
+        html[data-theme="dark"] {
+            --bg-color: #1b2b30;
+            --card-color: #3f5445;
+            --text-main: #a9c6a4;
+            --text-muted: #839a80;
+            --accent: #d97a1f;
+            --panel-bg: #17272b;
+            --badge-bg: #34473a;
+        }
+        body,
+        section,
+        .card,
+        .badge,
+        nav,
+        .top-banner,
+        .theme-toggle {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 55px;
+            right: 16px;
+            z-index: 70;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--card-color);
+            color: var(--text-main);
+            border: 2px solid var(--text-main);
+            border-radius: 20px;
+            padding: 0.4rem 0.9rem;
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.08);
+            background-color: var(--accent);
+            color: var(--bg-color);
+        }
+        @media (max-width: 500px) {
+            .theme-toggle {
+                top: 55px;
+                right: 8px;
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+        /* Giant background sea creatures - decorative, sits behind opaque content */
+        .sea-decor {
+            position: relative;
+            z-index: -1;
+        }
+        .decor-creature {
+            position: absolute;
+            z-index: -1;
+            font-size: 12rem;
+            line-height: 1;
+            color: var(--text-main);
+            opacity: 0.28;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+        @media (max-width: 700px) {
+            .decor-creature {
+                font-size: 6rem;
+            }
         }
         * {
             margin: 0;
@@ -25,7 +97,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.5;
-            padding: 0 1rem 2rem;
+            padding: 44px 1rem 2rem;
             font-size: 1.25rem;
         }
         /* Container to center everything nicely */
@@ -36,7 +108,7 @@
         /* Sticky Nav Bar */
         nav {
             position: sticky;
-            top: 0;
+            top: 44px;
             z-index: 10;
             display: flex;
             justify-content: center;
@@ -47,6 +119,7 @@
             margin: 0 -1rem 3rem;
         }
         nav a {
+            display: inline-block;
             color: var(--text-main);
             text-decoration: none;
             font-family: 'Pixelify Sans', sans-serif;
@@ -55,11 +128,12 @@
             letter-spacing: 0.03em;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
         }
         nav a:hover {
             background-color: var(--accent);
             color: var(--bg-color);
+            transform: scale(1.12);
         }
         /* Header Section */
         header {
@@ -84,9 +158,14 @@
             border: 2px solid var(--text-main);
             border-radius: 10px;
             padding: 1.5rem 1.5rem 1.75rem;
-            background-color: #fffefb;
+            background-color: var(--panel-bg);
             box-shadow: 4px 4px 0 var(--card-color);
-            scroll-margin-top: 5rem;
+            scroll-margin-top: 6.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        section:hover {
+            transform: translateY(-4px) scale(1.015);
+            box-shadow: 6px 8px 0 var(--card-color);
         }
         h2 {
             font-family: 'Pixelify Sans', sans-serif;
@@ -146,9 +225,11 @@
             font-weight: bold;
             margin-top: 1rem;
             font-size: 1.05rem;
+            transition: opacity 0.2s ease, transform 0.15s ease;
         }
         .btn:hover {
             opacity: 0.9;
+            transform: scale(1.08);
         }
         /* Badges for Skills */
         .badge-container {
@@ -157,12 +238,19 @@
             gap: 0.5rem;
         }
         .badge {
-            background-color: #ffd8a8;
+            display: inline-block;
+            background-color: var(--badge-bg);
             color: var(--text-main);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.95rem;
             font-weight: 500;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        .badge:hover {
+            transform: scale(1.12);
+            background-color: var(--accent);
+            color: var(--bg-color);
         }
         /* Contact Section Button Layout */
         .contact-links {
@@ -181,14 +269,60 @@
         }
         
         .contact-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.06);
             background-color: var(--text-main);
             color: var(--bg-color);
         }
-        
+
+        /* Top Scrolling Banner */
+        .top-banner {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+            background-color: var(--accent);
+            border-bottom: 2px solid var(--text-main);
+            overflow: hidden;
+            z-index: 60;
+        }
+        .ticker-item {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: var(--bg-color);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 1.15rem;
+            letter-spacing: 0.05em;
+            left: 100%;
+        }
+        .ticker-item span {
+            margin-right: 1.5rem;
+        }
+        .ticker-item span:last-child {
+            margin-right: 0;
+        }
+
     </style>
 </head>
 <body>
+    <div class="sea-decor" aria-hidden="true">
+        <span class="decor-creature" style="top: 260px; left: 5%;">ଳ</span>
+        <span class="decor-creature" style="top: 520px; right: 4%; font-size: 9rem;">⚓︎</span>
+        <span class="decor-creature" style="top: 900px; left: 2%; font-size: 10rem;">𓆝 ⋆.</span>
+        <span class="decor-creature" style="top: 1180px; right: 6%;">𓆉</span>
+        <span class="decor-creature" style="top: 1550px; left: 6%; font-size: 8rem;">ଳ</span>
+        <span class="decor-creature" style="top: 1850px; right: 3%; font-size: 11rem;">𓆝 ⋆.</span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <span id="themeToggleIcon">⋆✴︎˚｡⋆</span> <span id="themeToggleLabel">Dark</span>
+    </button>
+    <div class="top-banner">
+        <span class="ticker-item" id="tickerItem"></span>
+    </div>
     <nav>
         <a href="#about">about</a>
         <a href="#skills">skills</a>
@@ -196,7 +330,7 @@
         <a href="#contact">contact</a>
     </nav>
     <div class="container">
-        <header>
+        <header id="pageHeader">
             <h1>Wes H.</h1>
             <p class="subtitle"> Computer Science + Mathematics Major @ UofT/Full-Stack Developer</p>
         </header>
@@ -219,6 +353,7 @@
                 <span class="badge">Java</span>
                 <span class="badge">C#</span>
                 <span class="badge">R</span>
+                <span class="badge">HTML</span>
                 <span class="badge">Unity</span>
                 <span class="badge">Web Design</span>
                 <span class="badge">Git/GitHub</span>
@@ -256,7 +391,7 @@
             left: 0;
             pointer-events: none;
             z-index: 9999;
-            color: #ff7a1a;
+            color: var(--accent);
             font-size: 1.1rem;
             user-select: none;
             will-change: transform, opacity;
@@ -273,6 +408,138 @@
             }
         }
     </style>
+    <script>
+        (function () {
+            const phrases = [
+                { text: 'Wes', symbol: '𓆝 ⋆.˚ 𓇼', isName: true },
+                { text: 'UofT', symbol: '𓆟 ⋆.˚ 𓇼' },
+                { text: 'Full-Stack Developer', symbol: '𓆞 ⋆.˚ 𓇼' },
+                { text: 'Game Developer', symbol: '𓆝 ⋆.˚ 𓇼' }
+            ];
+            const speed = 180; // pixels per second
+            const banner = document.querySelector('.top-banner');
+            const item = document.getElementById('tickerItem');
+
+            function buildGroup() {
+                item.innerHTML = '';
+                phrases.forEach(function (phrase) {
+                    let label = phrase.text;
+                    if (phrase.isName && Math.random() < 0.01) {
+                        label = 'Aura Monster';
+                    }
+                    const textSpan = document.createElement('span');
+                    textSpan.textContent = label;
+                    const symbolSpan = document.createElement('span');
+                    symbolSpan.textContent = phrase.symbol;
+                    item.appendChild(textSpan);
+                    item.appendChild(symbolSpan);
+                });
+            }
+
+            function runNext() {
+                buildGroup();
+
+                const bannerWidth = banner.offsetWidth;
+                item.style.transition = 'none';
+                item.style.left = bannerWidth + 'px';
+
+                // Force reflow so the transition below applies from this start position
+                void item.offsetWidth;
+
+                const itemWidth = item.offsetWidth;
+                const distance = bannerWidth + itemWidth;
+                const duration = distance / speed;
+
+                item.style.transition = 'left ' + duration + 's linear';
+                item.style.left = (-itemWidth) + 'px';
+            }
+
+            item.addEventListener('transitionend', runNext);
+            runNext();
+        })();
+    </script>
+    <script>
+        (function () {
+            let audioCtx = null;
+
+            function getAudioCtx() {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContextClass) return null;
+                    audioCtx = new AudioContextClass();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                return audioCtx;
+            }
+
+            function playPop() {
+                const ctx = getAudioCtx();
+                if (!ctx) return;
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.exponentialRampToValueAtTime(320, now + 0.09);
+                gain.gain.setValueAtTime(0.0001, now);
+                gain.gain.exponentialRampToValueAtTime(0.18, now + 0.015);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.16);
+            }
+
+            document.querySelectorAll('section').forEach(function (section) {
+                section.addEventListener('mouseenter', playPop);
+            });
+
+            // Some browsers require a user gesture before audio can play;
+            // this unlocks the audio context on the first click anywhere.
+            document.addEventListener('pointerdown', getAudioCtx, { once: true });
+        })();
+    </script>
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const toggleBtn = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeToggleIcon');
+            const label = document.getElementById('themeToggleLabel');
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    icon.textContent = '⏾⋆.˚';
+                    label.textContent = 'Light';
+                } else {
+                    root.removeAttribute('data-theme');
+                    icon.textContent = '⋆✴︎˚｡⋆';
+                    label.textContent = 'Dark';
+                }
+            }
+
+            let saved = null;
+            try {
+                saved = localStorage.getItem('wes-portfolio-theme');
+            } catch (e) {
+                saved = null;
+            }
+            applyTheme(saved === 'dark' ? 'dark' : 'light');
+
+            toggleBtn.addEventListener('click', function () {
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next);
+                try {
+                    localStorage.setItem('wes-portfolio-theme', next);
+                } catch (e) {
+                    /* ignore if storage is unavailable */
+                }
+            });
+        })();
+    </script>
     <script>
         (function () {
             let lastTime = 0;
@@ -300,9 +567,5 @@
             });
         })();
     </script>
-</body>
-</html>
-</html>
-    </div>
 </body>
 </html>
