@@ -248,11 +248,60 @@
             </div>
         </section>
     </div>
+
+    <style>
+        .star-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            color: #ff7a1a;
+            font-size: 1.1rem;
+            user-select: none;
+            will-change: transform, opacity;
+            animation: star-fade 0.7s ease-out forwards;
+        }
+        @keyframes star-fade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.4) rotate(45deg) translateY(-14px);
+            }
+        }
+    </style>
+    <script>
+        (function () {
+            let lastTime = 0;
+            const throttleMs = 45;
+
+            document.addEventListener('mousemove', function (e) {
+                const now = Date.now();
+                if (now - lastTime < throttleMs) return;
+                lastTime = now;
+
+                const star = document.createElement('span');
+                star.className = 'star-trail';
+                star.textContent = '\u2605';
+                star.style.left = e.clientX + 'px';
+                star.style.top = e.clientY + 'px';
+
+                const size = 0.8 + Math.random() * 0.9;
+                star.style.fontSize = size + 'rem';
+
+                document.body.appendChild(star);
+
+                star.addEventListener('animationend', function () {
+                    star.remove();
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
-        </section>
-    </div>
-</body>
 </html>
     </div>
 </body>
