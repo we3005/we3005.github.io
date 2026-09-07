@@ -214,6 +214,11 @@
             margin-bottom: 0.5rem;
             color: var(--text-main);
         }
+        .card .collab-note {
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: -0.5rem;
+        }
         /* Action Buttons / Links */
         .btn {
             display: inline-block;
@@ -266,6 +271,16 @@
             text-align: center;
             min-width: 130px;
             transition: background-color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .contact-btn img {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
         }
         
         .contact-btn:hover {
@@ -375,6 +390,12 @@
                     <p>A small typing challenge game that tracks the users WPM (words per minute), accuracy, as well as which characters cause the most errors in order to improve typing accuracy and speed.</p>
                     <a href="https://github.com/we3005/Typing-Challenge" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
+                <div class="card">
+                    <h3>Video Converter</h3>
+                    <p class="collab-note">Made alongside eungyeolhan on GitHub.</p>
+                    <p>A tool for converting video files between formats, built as a collaborative project.</p>
+                    <a href="https://github.com/eungyeolhan/Video-Converter" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
             </div>
         </section>
 
@@ -382,9 +403,10 @@
             <h2>Contact</h2>
             <p>If you're interested in collaborating or just reaching out, use any of the links below ₍₍⚞(˶>ᗜ<˶)⚟⁾⁾</p>
             <div class="contact-links">
-                <a href="mailto:whara918@gmail.com" class="btn contact-btn">Email</a>
-                <a href="https://www.linkedin.com/in/wes-haralampopoulos-1b3123382/" class="btn contact-btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/we3005" class="btn contact-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:whara918@gmail.com" class="btn contact-btn"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Email">Email</a>
+                <a href="https://www.linkedin.com/in/wes-haralampopoulos-1b3123382/" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn">LinkedIn</a>
+                <a href="https://github.com/we3005" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">GitHub</a>
+                <a href="https://devpost.com/whara918" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/devpost/ffffff" alt="Devpost">Devpost</a>
             </div>
         </section>
     </div>
