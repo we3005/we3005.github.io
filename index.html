@@ -196,6 +196,105 @@
             gap: 1.5rem;
             margin-top: 1rem;
         }
+        /* Projects Carousel */
+        .carousel {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            flex: 1;
+            padding: 0.25rem;
+            scrollbar-width: none;
+        }
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-card {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+        }
+        .carousel-btn {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0;
+            border: 3px solid var(--text-main);
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+            box-shadow: 3px 3px 0 var(--text-main);
+            image-rendering: pixelated;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease, color 0.15s ease;
+        }
+        .carousel-btn svg {
+            width: 14px;
+            height: 26px;
+            fill: currentColor;
+            shape-rendering: crispEdges;
+        }
+        .carousel-prev svg {
+            transform: scaleX(-1);
+        }
+        .carousel-btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--text-main);
+        }
+        .carousel-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 var(--text-main);
+        }
+        .carousel-btn:disabled {
+            opacity: 0.35;
+            cursor: default;
+            transform: none;
+            box-shadow: 3px 3px 0 var(--text-main);
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+        }
+        .carousel-dots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+        .carousel-dot {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 0.85rem;
+            padding: 0.5rem 0.9rem;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            border: 2px solid var(--text-main);
+            background-color: var(--card-color);
+            color: var(--text-main);
+            cursor: pointer;
+            box-shadow: 2px 2px 0 var(--text-main);
+            transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .carousel-dot:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--text-main);
+        }
+        .carousel-dot.active {
+            background-color: var(--panel-bg);
+            color: var(--accent);
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
         /* Styled Cards */
         .card {
             background-color: var(--card-color);
@@ -379,47 +478,64 @@
 
         <section id="projects">
             <h2>Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>CSC111 Project 2</h3>
-                    <p>A UI interface that enables users to simulate economic shocks using weighted graphs. The easy to use interface allows users to customize data to simulate changes. Created as a school project.</p>
-                    <a href="https://github.com/Tabel0112/CSC111-Project-2" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+            <div class="carousel">
+                <button class="carousel-btn carousel-prev" type="button" aria-label="Previous project">
+                    <svg viewBox="0 0 5 9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="0" y="0" width="1" height="1"/>
+                        <rect x="0" y="1" width="2" height="1"/>
+                        <rect x="0" y="2" width="3" height="1"/>
+                        <rect x="0" y="3" width="4" height="1"/>
+                        <rect x="0" y="4" width="5" height="1"/>
+                        <rect x="0" y="5" width="4" height="1"/>
+                        <rect x="0" y="6" width="3" height="1"/>
+                        <rect x="0" y="7" width="2" height="1"/>
+                        <rect x="0" y="8" width="1" height="1"/>
+                    </svg>
+                </button>
+                <div class="carousel-track" id="projectsTrack">
+                    <div class="card carousel-card">
+                        <h3>CSC111 Project 2</h3>
+                        <p>A UI interface that enables users to simulate economic shocks using weighted graphs. The easy to use interface allows users to customize data to simulate changes. Created as a school project.</p>
+                        <a href="https://github.com/Tabel0112/CSC111-Project-2" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+                    </div>
+                    <div class="card carousel-card">
+                        <h3>Typing Challenge</h3>
+                        <p>A small typing challenge game that tracks the users WPM (words per minute), accuracy, as well as which characters cause the most errors in order to improve typing accuracy and speed.</p>
+                        <a href="https://github.com/we3005/Typing-Challenge" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+                    </div>
+                    <div class="card carousel-card">
+                        <h3>Video Converter</h3>
+                        <p class="collab-note">Made alongside eungyeolhan on GitHub.</p>
+                        <p>A tool for converting video files between formats, built as a collaborative project.</p>
+                        <a href="https://github.com/eungyeolhan/Video-Converter" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Typing Challenge</h3>
-                    <p>A small typing challenge game that tracks the users WPM (words per minute), accuracy, as well as which characters cause the most errors in order to improve typing accuracy and speed.</p>
-                    <a href="https://github.com/we3005/Typing-Challenge" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
-                <div class="card">
-                    <h3>Video Converter</h3>
-                    <p class="collab-note">Made alongside eungyeolhan on GitHub.</p>
-                    <p>A tool for converting video files between formats, built alongside GitHub user eungyeolhan.</p>
-                    <a href="https://github.com/eungyeolhan/Video-Converter" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
-                </div>
+                <button class="carousel-btn carousel-next" type="button" aria-label="Next project">
+                    <svg viewBox="0 0 5 9" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="0" y="0" width="1" height="1"/>
+                        <rect x="0" y="1" width="2" height="1"/>
+                        <rect x="0" y="2" width="3" height="1"/>
+                        <rect x="0" y="3" width="4" height="1"/>
+                        <rect x="0" y="4" width="5" height="1"/>
+                        <rect x="0" y="5" width="4" height="1"/>
+                        <rect x="0" y="6" width="3" height="1"/>
+                        <rect x="0" y="7" width="2" height="1"/>
+                        <rect x="0" y="8" width="1" height="1"/>
+                    </svg>
+                </button>
             </div>
+            <div class="carousel-dots" id="projectsDots"></div>
         </section>
 
         <section id="contact">
             <h2>Contact</h2>
             <p>If you're interested in collaborating or just reaching out, use any of the links below ₍₍⚞(˶>ᗜ<˶)⚟⁾⁾</p>
             <div class="contact-links">
-    <a href="mailto:whara918@gmail.com" class="btn contact-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-        Email
-    </a>
-    <a href="https://www.linkedin.com/in/wes-haralampopoulos-1b3123382/" class="btn contact-btn" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-    </a>
-    <a href="https://github.com/we3005" class="btn contact-btn" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
-    </a>
-    <a href="https://devpost.com/whara918" class="btn contact-btn" target="_blank" rel="noopener noreferrer">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.002 1.61L0 12.004L6.002 22.39h11.996L24 12.004L17.998 1.61H6.002zM7.16 4.96h4.354c3.55 0 5.86 2.222 5.86 7.043 0 4.806-2.31 7.044-5.86 7.044H7.16V4.96zm2.84 2.65v8.784h1.161c1.927 0 3.012-1.076 3.012-4.392 0-3.3-1.085-4.392-3.012-4.392H10z"/></svg>
-        Devpost
-    </a>
-</div>
+                <a href="mailto:whara918@gmail.com" class="btn contact-btn"><img class="contact-icon" data-slug="gmail" alt="" aria-hidden="true">Email</a>
+                <a href="https://www.linkedin.com/in/wes-haralampopoulos-1b3123382/" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img class="contact-icon" data-slug="linkedin" alt="" aria-hidden="true">LinkedIn</a>
+                <a href="https://github.com/we3005" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img class="contact-icon" data-slug="github" alt="" aria-hidden="true">GitHub</a>
+                <a href="https://devpost.com/whara918" class="btn contact-btn" target="_blank" rel="noopener noreferrer"><img class="contact-icon" data-slug="devpost" alt="" aria-hidden="true">Devpost</a>
+            </div>
         </section>
     </div>
 
@@ -603,6 +719,87 @@
                 star.addEventListener('animationend', function () {
                     star.remove();
                 });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const track = document.getElementById('projectsTrack');
+            const dotsWrap = document.getElementById('projectsDots');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            if (!track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+            const cards = Array.from(track.children);
+
+            cards.forEach(function (card, i) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'carousel-dot';
+                const titleEl = card.querySelector('h3');
+                dot.textContent = titleEl ? titleEl.textContent : 'Project ' + (i + 1);
+                dot.setAttribute('aria-label', 'Go to project ' + (i + 1));
+                dot.addEventListener('click', function () {
+                    cards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                });
+                dotsWrap.appendChild(dot);
+            });
+            const dots = Array.from(dotsWrap.children);
+
+            function cardStep() {
+                if (cards.length < 1) return 0;
+                const style = getComputedStyle(track);
+                const gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+                return cards[0].getBoundingClientRect().width + gap;
+            }
+
+            function updateActive() {
+                const step = cardStep();
+                const index = step ? Math.round(track.scrollLeft / step) : 0;
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle('active', i === index);
+                });
+                prevBtn.disabled = track.scrollLeft <= 4;
+                nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+            }
+
+            prevBtn.addEventListener('click', function () {
+                track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+            });
+            nextBtn.addEventListener('click', function () {
+                track.scrollBy({ left: cardStep(), behavior: 'smooth' });
+            });
+
+            let scrollTimeout;
+            track.addEventListener('scroll', function () {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActive, 80);
+            });
+            window.addEventListener('resize', updateActive);
+
+            updateActive();
+        })();
+    </script>
+    <script>
+        (function () {
+            const icons = document.querySelectorAll('.contact-icon');
+            icons.forEach(function (img) {
+                const slug = img.getAttribute('data-slug');
+                if (!slug) return;
+                const sources = [
+                    'https://cdn.simpleicons.org/' + slug + '/ffffff',
+                    'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/' + slug + '.svg'
+                ];
+                let i = 0;
+                function tryNext() {
+                    if (i >= sources.length) {
+                        img.style.display = 'none';
+                        return;
+                    }
+                    img.src = sources[i++];
+                }
+                img.addEventListener('error', tryNext);
+                tryNext();
             });
         })();
     </script>
